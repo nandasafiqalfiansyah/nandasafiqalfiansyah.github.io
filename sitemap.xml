@@ -6,7 +6,7 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
-   <url>
+  <url>
     <loc>http://ndav.me/github</loc>
     <lastmod>2025-02-01</lastmod>
     <changefreq>monthly</changefreq>
@@ -14,6 +14,18 @@
   </url>
   <url>
     <loc>http://ndav.me/sprouts-iot</loc>
+    <lastmod>2025-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>http://ndav.me/go-oauth</loc>
+    <lastmod>2025-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>http://ndav.me/rm-background</loc>
     <lastmod>2025-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
