@@ -1,45 +1,66 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NDAV.me - Selamat Datang</title>
+  <title>ndav.me | GitHub Projects</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-900 p-4">
-  <div class="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full text-center">
-    <h1 class="text-2xl font-bold">Selamat Datang di NDAV.me</h1>
-    <p class="mt-2 text-gray-600">Ini adalah halaman sederhana yang dibuat dengan GitHub Pages.</p>
-
-    <h2 class="text-xl font-semibold mt-6">Daftar Halaman:</h2>
-    <ul id="sitemapList" class="mt-4 space-y-2 text-blue-600"></ul>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-900 p-6">
+  <div class="bg-white shadow-xl rounded-lg p-8 max-w-xl w-full text-center">
+    <h1 class="text-3xl font-extrabold text-gray-800">Welcome to GitHub Project List</h1>
+    <p class="mt-3 text-gray-600 text-lg">This page contains a list of available projects on GitHub.</p>
+    
+    <div class="mt-6">
+      <h2 class="text-xl font-semibold text-gray-700">📜 Available Pages:</h2>
+      <ul id="sitemapList" class="mt-4 space-y-3 text-blue-600 font-medium text-lg"></ul>
+      <p id="loadingText" class="mt-3 text-gray-500 text-sm">Loading available pages...</p>
+    </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="mt-8 text-gray-500 text-sm">
+    &copy; <span id="currentYear"></span> <a href="http://ndav.me/" class="text-blue-600 hover:underline">ndav.me</a>. All rights reserved.
+  </footer>
 
   <script>
     async function fetchSitemap() {
       try {
         const response = await fetch('sitemap.xml');
+        if (!response.ok) throw new Error("Sitemap not found.");
+
         const text = await response.text();
         const parser = new DOMParser();
         const xml = parser.parseFromString(text, 'application/xml');
         const urls = xml.querySelectorAll('url loc');
 
         const sitemapList = document.getElementById('sitemapList');
+        const loadingText = document.getElementById('loadingText');
+        
         sitemapList.innerHTML = '';
+        loadingText.style.display = 'none';
+
+        if (urls.length === 0) {
+          loadingText.textContent = "No pages available.";
+          loadingText.style.display = 'block';
+          return;
+        }
 
         urls.forEach(url => {
           const listItem = document.createElement('li');
           const link = document.createElement('a');
           link.href = url.textContent;
-          link.textContent = url.textContent;
-          link.classList.add('hover:underline');
+          link.textContent = url.textContent.replace(/^https?:\/\//, '').replace(/\/$/, '');
+          link.classList.add('hover:underline', 'hover:text-blue-700', 'transition', 'duration-200');
           listItem.appendChild(link);
           sitemapList.appendChild(listItem);
         });
       } catch (error) {
-        console.error('Gagal mengambil sitemap:', error);
+        document.getElementById('loadingText').textContent = "Failed to load sitemap.";
+        console.error('Failed to fetch sitemap:', error);
       }
     }
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
     fetchSitemap();
   </script>
 </body>

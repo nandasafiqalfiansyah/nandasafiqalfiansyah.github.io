@@ -5,17 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirect to GitHub...</title>
   <meta http-equiv="refresh" content="3;url=https://github.com/nandasafiqalfiansyah">
-  <script>
-    setTimeout(() => {
-      window.location.href = "https://github.com/nandasafiqalfiansyah";
-    }, 3000);
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    let countdown = 3; 
+    function updateCountdown() {
+      document.getElementById("countdown").textContent = countdown;
+      countdown--;
+      if (countdown < 0) {
+        window.location.href = "https://github.com/nandasafiqalfiansyah";
+      } else {
+        setTimeout(updateCountdown, 1000);
+      }
+    }
+    window.onload = updateCountdown;
+  </script>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-900 p-4">
   <div class="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full text-center">
     <h1 class="text-2xl font-bold">Mengalihkan ke GitHub...</h1>
-    <p class="mt-2 text-gray-600">Jika tidak dialihkan dalam 3 detik, klik <a href="https://github.com/nandasafiqalfiansyah" class="text-blue-600 hover:underline">di sini</a>.</p>
+    <p class="mt-2 text-gray-600">
+      Halaman akan dialihkan dalam <span id="countdown" class="font-bold text-red-600">3</span> detik...
+    </p>
+    <p class="mt-2 text-gray-600">
+      Jika tidak dialihkan, klik <a href="https://github.com/nandasafiqalfiansyah" class="text-blue-600 hover:underline">di sini</a>.
+    </p>
   </div>
 </body>
 </html>
