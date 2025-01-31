@@ -1,32 +1,46 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ndav.me</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-        h1 { color: blue; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NDAV.me - Selamat Datang</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Nanda Safiq Alfiansyah</h1>
-    <p>Selamat datang di website saya!</p>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ndav.me</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-        h1 { color: blue; }
-    </style>
-</head>
-<body>
-    <h1>Nanda Safiq Alfiansyah</h1>
-    <p>Selamat datang di website saya!</p>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-900 p-4">
+  <div class="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full text-center">
+    <h1 class="text-2xl font-bold">Selamat Datang di NDAV.me</h1>
+    <p class="mt-2 text-gray-600">Ini adalah halaman sederhana yang dibuat dengan GitHub Pages.</p>
+
+    <h2 class="text-xl font-semibold mt-6">Daftar Halaman:</h2>
+    <ul id="sitemapList" class="mt-4 space-y-2 text-blue-600"></ul>
+  </div>
+
+  <script>
+    async function fetchSitemap() {
+      try {
+        const response = await fetch('sitemap.xml');
+        const text = await response.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, 'application/xml');
+        const urls = xml.querySelectorAll('url loc');
+
+        const sitemapList = document.getElementById('sitemapList');
+        sitemapList.innerHTML = '';
+
+        urls.forEach(url => {
+          const listItem = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = url.textContent;
+          link.textContent = url.textContent;
+          link.classList.add('hover:underline');
+          listItem.appendChild(link);
+          sitemapList.appendChild(listItem);
+        });
+      } catch (error) {
+        console.error('Gagal mengambil sitemap:', error);
+      }
+    }
+    fetchSitemap();
+  </script>
 </body>
 </html>
