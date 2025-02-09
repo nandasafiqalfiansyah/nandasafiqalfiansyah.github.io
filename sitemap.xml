@@ -24,12 +24,6 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
-  <url>
-    <loc>http://ndav.me/rm-background</loc>
-    <lastmod>2025-02-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
    <url>
     <loc>http://ndav.me/certificate-generator</loc>
     <lastmod>2025-02-10</lastmod>
